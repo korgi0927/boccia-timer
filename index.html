@@ -56,53 +56,30 @@
       color: #eee;
     }
     #disclaimer-box h2 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 16px;
-      color: #fff;
-      letter-spacing: 0.05em;
+      font-size: 1.1rem; font-weight: 700; text-align: center;
+      margin-bottom: 16px; color: #fff; letter-spacing: 0.05em;
     }
     #disclaimer-box p {
-      font-size: 0.82rem;
-      line-height: 1.7;
-      color: #ccc;
-      margin-bottom: 20px;
+      font-size: 0.82rem; line-height: 1.7; color: #ccc; margin-bottom: 20px;
     }
     #disclaimer-box .check-row {
       display: flex; align-items: flex-start; gap: 10px;
-      margin-bottom: 20px;
-      cursor: pointer;
+      margin-bottom: 20px; cursor: pointer;
     }
     #disclaimer-box .check-row input[type="checkbox"] {
       width: 20px; height: 20px; margin-top: 2px; flex-shrink: 0;
-      accent-color: #4a9eff;
-      cursor: pointer;
+      accent-color: #4a9eff; cursor: pointer;
     }
     #disclaimer-box .check-row label {
-      font-size: 0.83rem;
-      color: #ddd;
-      cursor: pointer;
-      line-height: 1.5;
+      font-size: 0.83rem; color: #ddd; cursor: pointer; line-height: 1.5;
     }
     #disclaimer-agree-btn {
-      width: 100%;
-      padding: 14px;
-      background: #333;
-      border: none;
-      border-radius: 10px;
-      color: #888;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: not-allowed;
-      transition: background 0.3s, color 0.3s;
+      width: 100%; padding: 14px; background: #333; border: none;
+      border-radius: 10px; color: #888; font-size: 1rem; font-weight: 700;
+      cursor: not-allowed; transition: background 0.3s, color 0.3s;
       font-family: 'Noto Sans JP', sans-serif;
     }
-    #disclaimer-agree-btn.active {
-      background: #4a9eff;
-      color: #fff;
-      cursor: pointer;
-    }
+    #disclaimer-agree-btn.active { background: #4a9eff; color: #fff; cursor: pointer; }
 
     /* ===== MAIN LAYOUT ===== */
     #app {
@@ -115,6 +92,85 @@
     }
     #app.visible { display: flex; }
 
+    /* ===== VOLUME BAR (above white timer) ===== */
+    #volume-bar {
+      background: #222;
+      border-radius: 12px;
+      padding: 7px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    #volume-bar .vol-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #aaa;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    /* ➖ ➕ buttons */
+    .vol-ctrl-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: #444;
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s, transform 0.1s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .vol-ctrl-btn:active { transform: scale(0.88); background: #666; }
+
+    /* Bar graph (display only, no touch interaction) */
+    #vol-graph {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      pointer-events: none; /* タッチ無効 */
+      user-select: none;
+    }
+    .vol-seg {
+      flex: 1;
+      height: 18px;
+      border-radius: 3px;
+      background: #333;
+      transition: background 0.2s;
+    }
+    .vol-seg.active { background: #4a9eff; }
+    .vol-seg.active.warn { background: #f39c12; }
+    .vol-seg.active.loud { background: #e74c3c; }
+
+    /* 消音ボタン */
+    #mute-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: #444;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s, transform 0.1s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    #mute-btn:active { transform: scale(0.88); }
+    #mute-btn.muted { background: #c0392b; }
+
+    /* ===== TIMER PANELS ===== */
     .timer-panel {
       border-radius: 14px;
       display: flex;
@@ -131,234 +187,125 @@
       overflow: hidden;
     }
 
-    /* ===== RESET BUTTON (top-right corner of each panel) ===== */
+    /* ===== RESET BUTTON (top-right corner) ===== */
     .reset-btn {
       position: absolute;
-      top: 10px;
-      right: 10px;
-      width: 40px;
-      height: 40px;
+      top: 10px; right: 10px;
+      width: 40px; height: 40px;
       border-radius: 50%;
       border: none;
-      font-size: 1.1rem;
-      font-weight: 900;
+      font-size: 1.1rem; font-weight: 900;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
+      display: flex; align-items: center; justify-content: center;
       transition: transform 0.15s, opacity 0.2s;
       -webkit-tap-highlight-color: transparent;
       z-index: 5;
       box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
     .reset-btn:active { transform: scale(0.88) rotate(-30deg); }
+    #timer-white .reset-btn { background: #ddd; color: #333; }
+    #timer-blue  .reset-btn { background: #1a4a9a; color: #cce0ff; border: 1px solid #4477cc; }
+    #timer-red   .reset-btn { background: #8a1a1a; color: #ffcccc; border: 1px solid #cc4444; }
 
-    #timer-white .reset-btn {
-      background: #ddd;
-      color: #333;
-    }
-    #timer-blue .reset-btn {
-      background: #1a4a9a;
-      color: #cce0ff;
-      border: 1px solid #4477cc;
-    }
-    #timer-red .reset-btn {
-      background: #8a1a1a;
-      color: #ffcccc;
-      border: 1px solid #cc4444;
-    }
-
-    /* ===== WHITE TIMER (top) ===== */
-    #timer-white {
-      background: var(--white-bg);
-      border-color: var(--white-border);
-      flex: 1.2;
-    }
-    #timer-white .panel-label {
-      color: #555;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
+    /* ===== WHITE TIMER ===== */
+    #timer-white { background: var(--white-bg); border-color: var(--white-border); flex: 1.2; }
+    #timer-white .panel-label { color: #555; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
     #timer-white .time-display {
-      font-family: 'Orbitron', monospace;
-      font-weight: 900;
+      font-family: 'Orbitron', monospace; font-weight: 900;
       font-size: clamp(2.8rem, 12vw, 4.8rem);
-      color: var(--white-text);
-      letter-spacing: 0.04em;
-      line-height: 1;
-      transition: color 0.35s;
+      color: var(--white-text); letter-spacing: 0.04em; line-height: 1; transition: color 0.35s;
     }
     #timer-white .btn-row { display: flex; gap: 10px; }
-    /* Large round start/stop button for white */
     #timer-white .start-btn {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      border: none;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 700;
-      cursor: pointer;
-      background: var(--white-btn);
-      color: #fff;
+      width: 80px; height: 80px; border-radius: 50%; border: none;
+      font-family: 'Noto Sans JP', sans-serif; font-size: 0.9rem; font-weight: 700;
+      cursor: pointer; background: var(--white-btn); color: #fff;
       transition: opacity 0.2s, transform 0.1s, background 0.2s;
       -webkit-tap-highlight-color: transparent;
       box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 2px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 2px;
     }
     #timer-white .start-btn:active { transform: scale(0.92); }
-    #timer-white .start-btn.running {
-      background: #c0392b;
-    }
+    #timer-white .start-btn.running { background: #c0392b; }
 
     /* ===== BOTTOM ROW ===== */
-    #bottom-row {
-      display: flex;
-      gap: 6px;
-      flex: 1.6;
-      min-height: 0;
-    }
+    #bottom-row { display: flex; gap: 6px; flex: 1.6; min-height: 0; }
 
     /* ===== BLUE TIMER ===== */
-    #timer-blue {
-      background: var(--blue-bg);
-      border-color: var(--blue-border);
-      flex: 1;
-    }
+    #timer-blue { background: var(--blue-bg); border-color: var(--blue-border); flex: 1; }
     #timer-blue .panel-label { color: #99bbff; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
     #timer-blue .time-display {
-      font-family: 'Orbitron', monospace;
-      font-weight: 900;
+      font-family: 'Orbitron', monospace; font-weight: 900;
       font-size: clamp(2.2rem, 9vw, 3.6rem);
-      color: var(--blue-text);
-      letter-spacing: 0.04em;
-      line-height: 1;
-      transition: color 0.35s;
+      color: var(--blue-text); letter-spacing: 0.04em; line-height: 1; transition: color 0.35s;
     }
     #timer-blue .btn-row { display: flex; flex-direction: column; align-items: center; gap: 7px; width: 100%; }
     #timer-blue .start-btn {
-      width: 68px;
-      height: 68px;
-      border-radius: 50%;
-      border: none;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      background: var(--blue-btn);
-      color: #fff;
+      width: 68px; height: 68px; border-radius: 50%; border: none;
+      font-family: 'Noto Sans JP', sans-serif; font-size: 0.82rem; font-weight: 700;
+      cursor: pointer; background: var(--blue-btn); color: #fff;
       transition: opacity 0.2s, transform 0.1s, background 0.2s;
       -webkit-tap-highlight-color: transparent;
       box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
     }
     #timer-blue .start-btn:active { transform: scale(0.92); }
     #timer-blue .start-btn.running { background: #c0392b; }
 
     /* ===== RED TIMER ===== */
-    #timer-red {
-      background: var(--red-bg);
-      border-color: var(--red-border);
-      flex: 1;
-    }
+    #timer-red { background: var(--red-bg); border-color: var(--red-border); flex: 1; }
     #timer-red .panel-label { color: #ffaaaa; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
     #timer-red .time-display {
-      font-family: 'Orbitron', monospace;
-      font-weight: 900;
+      font-family: 'Orbitron', monospace; font-weight: 900;
       font-size: clamp(2.2rem, 9vw, 3.6rem);
-      color: var(--red-text);
-      letter-spacing: 0.04em;
-      line-height: 1;
-      transition: color 0.35s;
+      color: var(--red-text); letter-spacing: 0.04em; line-height: 1; transition: color 0.35s;
     }
     #timer-red .btn-row { display: flex; flex-direction: column; align-items: center; gap: 7px; width: 100%; }
     #timer-red .start-btn {
-      width: 68px;
-      height: 68px;
-      border-radius: 50%;
-      border: none;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      background: var(--red-btn);
-      color: #fff;
+      width: 68px; height: 68px; border-radius: 50%; border: none;
+      font-family: 'Noto Sans JP', sans-serif; font-size: 0.82rem; font-weight: 700;
+      cursor: pointer; background: var(--red-btn); color: #fff;
       transition: opacity 0.2s, transform 0.1s, background 0.2s;
       -webkit-tap-highlight-color: transparent;
       box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
     }
     #timer-red .start-btn:active { transform: scale(0.92); }
     #timer-red .start-btn.running { background: #c0392b; }
 
     /* ===== LOCK STATE ===== */
-    .timer-panel.locked {
-      opacity: var(--lock-opacity);
-      pointer-events: none;
-    }
+    .timer-panel.locked { opacity: var(--lock-opacity); pointer-events: none; }
     #timer-white.locked .time-display { color: #bbb; }
 
-    /* ===== SET ROW (min/sec inputs) ===== */
-    .set-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.78rem;
-      font-weight: 700;
-    }
+    /* ===== SET ROW ===== */
+    .set-row { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; }
     #timer-white .set-row { color: #555; }
-    #timer-blue .set-row { color: #aaccff; }
-    #timer-red .set-row { color: #ffaaaa; }
+    #timer-blue  .set-row { color: #aaccff; }
+    #timer-red   .set-row { color: #ffaaaa; }
     .set-row input {
-      width: 42px;
-      text-align: center;
-      border-radius: 6px;
-      border: 1px solid #aaa;
-      padding: 4px 2px;
-      font-size: 0.9rem;
-      font-family: 'Orbitron', monospace;
-      font-weight: 700;
-      background: rgba(255,255,255,0.13);
-      color: inherit;
+      width: 42px; text-align: center; border-radius: 6px; border: 1px solid #aaa;
+      padding: 4px 2px; font-size: 0.9rem; font-family: 'Orbitron', monospace;
+      font-weight: 700; background: rgba(255,255,255,0.13); color: inherit;
       -webkit-tap-highlight-color: transparent;
     }
     #timer-white .set-row input { background: rgba(0,0,0,0.08); color: #333; border-color: #bbb; }
     .set-row span { font-size: 0.75rem; }
 
     /* ===== ALERT FLASH ===== */
-    @keyframes flash {
-      0%,100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
+    @keyframes flash { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
     .time-display.alert { animation: flash 0.4s ease-in-out 3; }
 
     /* ===== DONE BADGE ===== */
     .done-badge {
-      display: none;
-      position: absolute;
-      top: 50%; left: 50%;
+      display: none; position: absolute; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      font-family: 'Orbitron', monospace;
-      font-size: clamp(1.4rem, 7vw, 2.4rem);
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      pointer-events: none;
-      z-index: 10;
+      font-family: 'Orbitron', monospace; font-size: clamp(1.4rem, 7vw, 2.4rem);
+      font-weight: 900; letter-spacing: 0.1em; pointer-events: none; z-index: 10;
     }
     #timer-white .done-badge { color: #d00; background: rgba(248,248,248,0.88); padding: 6px 16px; border-radius: 10px; }
-    #timer-blue .done-badge { color: #ffe066; background: rgba(10,30,80,0.88); padding: 6px 16px; border-radius: 10px; }
-    #timer-red .done-badge { color: #ffe066; background: rgba(80,10,10,0.88); padding: 6px 16px; border-radius: 10px; }
+    #timer-blue  .done-badge { color: #ffe066; background: rgba(10,30,80,0.88); padding: 6px 16px; border-radius: 10px; }
+    #timer-red   .done-badge { color: #ffe066; background: rgba(80,10,10,0.88); padding: 6px 16px; border-radius: 10px; }
     .done-badge.show { display: block; }
   </style>
 </head>
@@ -385,7 +332,18 @@
 <!-- MAIN APP -->
 <div id="app">
 
-  <!-- WHITE TIMER (top) -->
+  <!-- VOLUME BAR (常時表示・白タイマー上部) -->
+  <div id="volume-bar">
+    <span class="vol-label">🔊 音量</span>
+    <button class="vol-ctrl-btn" onclick="changeVolume(-1)" aria-label="音量を下げる">－</button>
+    <div id="vol-graph">
+      <!-- 10セグメント：JSで生成 -->
+    </div>
+    <button class="vol-ctrl-btn" onclick="changeVolume(1)" aria-label="音量を上げる">＋</button>
+    <button id="mute-btn" onclick="toggleMute()" aria-label="消音">🔇</button>
+  </div>
+
+  <!-- WHITE TIMER -->
   <div class="timer-panel" id="timer-white">
     <button class="reset-btn" onclick="resetTimer('white')" title="リセット">↺</button>
     <div class="panel-label">⚪ WHITE TIMER</div>
@@ -451,68 +409,149 @@
     document.getElementById('app').classList.add('visible');
   }
 
+  // ===== VOLUME & AUDIO =====
+  const VOL_STEPS = 10;
+  let volLevel = 7;   // 0〜10（0=消音相当）
+  let isMuted = false;
+  let audioCtx = null;
+
+  function getAudioCtx() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    // iOSはユーザー操作後でないと動かないため、resumeを試みる
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+  }
+
+  // ビープ音を鳴らす: freq=周波数, dur=秒, vol=0〜1
+  function beep(freq, dur, vol) {
+    try {
+      const ctx = getAudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(vol, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + dur);
+    } catch(e) { /* 音声エラーは無視 */ }
+  }
+
+  function getVolGain() {
+    if (isMuted || volLevel === 0) return 0;
+    return volLevel / VOL_STEPS;
+  }
+
+  // 警告音パターン: beepsArr = [{freq, dur}, ...]
+  function playAlert(beepsArr) {
+    const vol = getVolGain();
+    if (vol === 0) return;
+    let delay = 0;
+    beepsArr.forEach(b => {
+      setTimeout(() => beep(b.freq, b.dur, vol), delay);
+      delay += (b.dur + 0.08) * 1000;
+    });
+  }
+
+  // 各タイミングの音パターン定義
+  const SOUND = {
+    warn1:  [{ freq: 880, dur: 0.18 }, { freq: 880, dur: 0.18 }],           // 短2回
+    warn2:  [{ freq: 880, dur: 0.18 }, { freq: 880, dur: 0.18 }, { freq: 1100, dur: 0.3 }], // 2回+高音
+    warn3:  [{ freq: 1100, dur: 0.25 }, { freq: 1100, dur: 0.25 }],          // 高音2回
+    finish: [{ freq: 1320, dur: 0.4 }, { freq: 1320, dur: 0.4 }, { freq: 1320, dur: 0.6 }], // 終了3回
+  };
+
+  // ===== VOLUME BAR UI =====
+  function buildVolGraph() {
+    const g = document.getElementById('vol-graph');
+    g.innerHTML = '';
+    for (let i = 1; i <= VOL_STEPS; i++) {
+      const seg = document.createElement('div');
+      seg.className = 'vol-seg';
+      seg.dataset.idx = i;
+      g.appendChild(seg);
+    }
+    updateVolGraph();
+  }
+
+  function updateVolGraph() {
+    document.querySelectorAll('.vol-seg').forEach(seg => {
+      const i = parseInt(seg.dataset.idx);
+      const active = !isMuted && i <= volLevel;
+      seg.classList.toggle('active', active);
+      seg.classList.remove('warn', 'loud');
+      if (active) {
+        if (i >= 9) seg.classList.add('loud');
+        else if (i >= 7) seg.classList.add('warn');
+      }
+    });
+    // ミュートボタン表示
+    const mb = document.getElementById('mute-btn');
+    mb.classList.toggle('muted', isMuted);
+    mb.textContent = isMuted ? '🔇' : '🔊';
+  }
+
+  function changeVolume(delta) {
+    if (isMuted) {
+      // ミュート中に±操作したらミュート解除
+      isMuted = false;
+    }
+    volLevel = Math.max(0, Math.min(VOL_STEPS, volLevel + delta));
+    updateVolGraph();
+    // 操作音フィードバック（小さめ）
+    const v = getVolGain();
+    if (v > 0) beep(660, 0.1, v * 0.5);
+  }
+
+  function toggleMute() {
+    isMuted = !isMuted;
+    updateVolGraph();
+  }
+
   // ===== TIMER STATE =====
   const timers = {
-    white: { interval: null, remaining: 60, running: false },
+    white: { interval: null, remaining: 60,  running: false },
     blue:  { interval: null, remaining: 180, running: false },
     red:   { interval: null, remaining: 180, running: false },
   };
   let activeTimer = null;
-
   const startBtnId = { white: 'w-start-btn', blue: 'b-start-btn', red: 'r-start-btn' };
 
   function getSeconds(key) {
     if (key === 'white') {
-      return (parseInt(document.getElementById('w-min').value) || 0) * 60 +
-             (parseInt(document.getElementById('w-sec').value) || 0);
+      return (parseInt(document.getElementById('w-min').value)||0)*60 +
+             (parseInt(document.getElementById('w-sec').value)||0);
     } else if (key === 'blue') {
-      return (parseInt(document.getElementById('b-min').value) || 0) * 60 +
-             (parseInt(document.getElementById('b-sec').value) || 0);
+      return (parseInt(document.getElementById('b-min').value)||0)*60 +
+             (parseInt(document.getElementById('b-sec').value)||0);
     } else {
-      return (parseInt(document.getElementById('r-min').value) || 0) * 60 +
-             (parseInt(document.getElementById('r-sec').value) || 0);
+      return (parseInt(document.getElementById('r-min').value)||0)*60 +
+             (parseInt(document.getElementById('r-sec').value)||0);
     }
   }
 
   function fmt(sec) {
-    const m = Math.floor(sec / 60);
-    const s = sec % 60;
-    return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+    return String(Math.floor(sec/60)).padStart(2,'0') + ':' + String(sec%60).padStart(2,'0');
   }
 
   function getDisplay(key) {
-    return document.getElementById(
-      key === 'white' ? 'w-display' : key === 'blue' ? 'b-display' : 'r-display'
-    );
+    return document.getElementById(key==='white'?'w-display':key==='blue'?'b-display':'r-display');
   }
   function getDone(key) {
-    return document.getElementById(
-      key === 'white' ? 'w-done' : key === 'blue' ? 'b-done' : 'r-done'
-    );
+    return document.getElementById(key==='white'?'w-done':key==='blue'?'b-done':'r-done');
   }
-  function getPanel(key) {
-    return document.getElementById('timer-' + key);
-  }
-  function getStartBtn(key) {
-    return document.getElementById(startBtnId[key]);
-  }
+  function getPanel(key) { return document.getElementById('timer-'+key); }
+  function getStartBtn(key) { return document.getElementById(startBtnId[key]); }
 
   function setStartBtnState(key, running) {
     const btn = getStartBtn(key);
-    if (running) {
-      btn.classList.add('running');
-      if (key === 'white') {
-        btn.innerHTML = '⏹<br>ストップ';
-      } else {
-        btn.textContent = '⏹ ストップ';
-      }
+    btn.classList.toggle('running', running);
+    if (key === 'white') {
+      btn.innerHTML = running ? '⏹<br>ストップ' : '▶<br>スタート';
     } else {
-      btn.classList.remove('running');
-      if (key === 'white') {
-        btn.innerHTML = '▶<br>スタート';
-      } else {
-        btn.textContent = '▶ スタート';
-      }
+      btn.textContent = running ? '⏹ ストップ' : '▶ スタート';
     }
   }
 
@@ -529,13 +568,8 @@
   }
 
   function updateLock() {
-    ['white', 'blue', 'red'].forEach(key => {
-      const panel = getPanel(key);
-      if (activeTimer && activeTimer !== key) {
-        panel.classList.add('locked');
-      } else {
-        panel.classList.remove('locked');
-      }
+    ['white','blue','red'].forEach(key => {
+      getPanel(key).classList.toggle('locked', !!(activeTimer && activeTimer !== key));
     });
   }
 
@@ -544,27 +578,22 @@
     const t = timers[key];
 
     if (t.running) {
-      // STOP
-      clearInterval(t.interval);
-      t.interval = null;
-      t.running = false;
-      activeTimer = null;
-      setStartBtnState(key, false);
-      updateLock();
+      clearInterval(t.interval); t.interval = null;
+      t.running = false; activeTimer = null;
+      setStartBtnState(key, false); updateLock();
       return;
     }
 
-    // START / RESUME
     if (t.remaining <= 0) resetTimer(key);
     t.remaining = t.remaining > 0 ? t.remaining : getSeconds(key);
     if (t.remaining <= 0) return;
 
-    t.running = true;
-    activeTimer = key;
-    getDone(key).classList.remove('show');
-    setStartBtnState(key, true);
-    updateLock();
+    // iOSのAudioContext解除をユーザー操作タイミングで行う
+    getAudioCtx();
 
+    t.running = true; activeTimer = key;
+    getDone(key).classList.remove('show');
+    setStartBtnState(key, true); updateLock();
     t.interval = setInterval(() => tick(key), 1000);
   }
 
@@ -574,46 +603,54 @@
     getDisplay(key).textContent = fmt(t.remaining);
 
     if (key === 'white') {
-      if (t.remaining === 15) { vibrate([200, 100, 200]); flashDisplay(key); }
+      if (t.remaining === 15) {
+        vibrate([200, 100, 200]);
+        playAlert(SOUND.warn1);
+        flashDisplay(key);
+      }
       if (t.remaining <= 0) finishTimer(key);
     } else {
-      if (t.remaining === 60) { vibrate([200, 100, 200]); flashDisplay(key); }
-      else if (t.remaining === 30) { vibrate([200, 100, 200, 100, 200]); flashDisplay(key); }
-      else if (t.remaining === 10) { vibrate([300, 80, 300]); flashDisplay(key); }
+      if (t.remaining === 60) {
+        vibrate([200, 100, 200]);
+        playAlert(SOUND.warn1);
+        flashDisplay(key);
+      } else if (t.remaining === 30) {
+        vibrate([200, 100, 200, 100, 200]);
+        playAlert(SOUND.warn2);
+        flashDisplay(key);
+      } else if (t.remaining === 10) {
+        vibrate([300, 80, 300]);
+        playAlert(SOUND.warn3);
+        flashDisplay(key);
+      }
       if (t.remaining <= 0) finishTimer(key);
     }
   }
 
   function finishTimer(key) {
     const t = timers[key];
-    clearInterval(t.interval);
-    t.interval = null;
-    t.running = false;
-    t.remaining = 0;
+    clearInterval(t.interval); t.interval = null;
+    t.running = false; t.remaining = 0;
     getDisplay(key).textContent = '00:00';
     getDone(key).classList.add('show');
     activeTimer = null;
-    setStartBtnState(key, false);
-    updateLock();
+    setStartBtnState(key, false); updateLock();
     vibrate([500, 100, 500, 100, 500]);
+    playAlert(SOUND.finish);
   }
 
   function resetTimer(key) {
     const t = timers[key];
-    clearInterval(t.interval);
-    t.interval = null;
+    clearInterval(t.interval); t.interval = null;
     t.running = false;
     t.remaining = getSeconds(key);
     getDisplay(key).textContent = fmt(t.remaining);
     getDone(key).classList.remove('show');
     setStartBtnState(key, false);
-    if (activeTimer === key) {
-      activeTimer = null;
-      updateLock();
-    }
+    if (activeTimer === key) { activeTimer = null; updateLock(); }
   }
 
-  // Update display when inputs change
+  // 入力変更で表示更新
   ['w-min','w-sec'].forEach(id => {
     document.getElementById(id).addEventListener('change', () => {
       if (!timers.white.running) {
@@ -639,10 +676,11 @@
     });
   });
 
-  // Init
+  // 初期化
+  buildVolGraph();
   getDisplay('white').textContent = fmt(getSeconds('white'));
-  getDisplay('blue').textContent = fmt(getSeconds('blue'));
-  getDisplay('red').textContent = fmt(getSeconds('red'));
+  getDisplay('blue').textContent  = fmt(getSeconds('blue'));
+  getDisplay('red').textContent   = fmt(getSeconds('red'));
 </script>
 </body>
 </html>

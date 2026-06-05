@@ -29,9 +29,7 @@
     }
 
     html, body {
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
+      height: 100%; width: 100%; overflow: hidden;
       background: #111;
       font-family: 'Noto Sans JP', sans-serif;
       -webkit-tap-highlight-color: transparent;
@@ -47,13 +45,8 @@
       padding: 20px;
     }
     #disclaimer-box {
-      background: #1a1a1a;
-      border: 2px solid #444;
-      border-radius: 16px;
-      padding: 28px 22px 22px;
-      max-width: 420px;
-      width: 100%;
-      color: #eee;
+      background: #1a1a1a; border: 2px solid #444; border-radius: 16px;
+      padding: 28px 22px 22px; max-width: 420px; width: 100%; color: #eee;
     }
     #disclaimer-box h2 {
       font-size: 1.1rem; font-weight: 700; text-align: center;
@@ -81,90 +74,89 @@
     }
     #disclaimer-agree-btn.active { background: #4a9eff; color: #fff; cursor: pointer; }
 
+    /* ===== SOUND TEST MODAL (iOS用) ===== */
+    #soundtest-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 9998;
+      display: none;
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    #soundtest-overlay.show { display: flex; }
+    #soundtest-box {
+      background: #1a1a1a; border: 2px solid #4a9eff; border-radius: 16px;
+      padding: 28px 22px; max-width: 360px; width: 100%;
+      color: #eee; text-align: center;
+    }
+    #soundtest-box h3 {
+      font-size: 1rem; font-weight: 700; color: #fff;
+      margin-bottom: 14px; letter-spacing: 0.04em;
+    }
+    #soundtest-box p {
+      font-size: 0.82rem; color: #bbb; line-height: 1.7; margin-bottom: 20px;
+    }
+    #soundtest-play-btn {
+      width: 100%; padding: 16px; border: none; border-radius: 12px;
+      background: #4a9eff; color: #fff; font-size: 1.05rem; font-weight: 700;
+      cursor: pointer; margin-bottom: 12px;
+      font-family: 'Noto Sans JP', sans-serif;
+      transition: background 0.2s;
+    }
+    #soundtest-play-btn:active { background: #2277cc; }
+    #soundtest-play-btn.ok { background: #27ae60; }
+    #soundtest-skip-btn {
+      width: 100%; padding: 12px; border: none; border-radius: 10px;
+      background: #333; color: #aaa; font-size: 0.88rem; font-weight: 700;
+      cursor: pointer;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    #soundtest-skip-btn:active { background: #444; }
+    #soundtest-note {
+      margin-top: 14px; font-size: 0.75rem; color: #888; line-height: 1.6;
+    }
+
     /* ===== MAIN LAYOUT ===== */
     #app {
-      display: none;
-      flex-direction: column;
-      height: 100dvh;
-      gap: 6px;
-      padding: 6px;
-      background: #111;
+      display: none; flex-direction: column;
+      height: 100dvh; gap: 6px; padding: 6px; background: #111;
     }
     #app.visible { display: flex; }
 
-    /* ===== VOLUME BAR (above white timer) ===== */
+    /* ===== VOLUME BAR ===== */
     #volume-bar {
-      background: #222;
-      border-radius: 12px;
+      background: #222; border-radius: 12px;
       padding: 7px 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-shrink: 0;
+      display: flex; align-items: center; gap: 8px; flex-shrink: 0;
     }
     #volume-bar .vol-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: #aaa;
-      letter-spacing: 0.1em;
-      white-space: nowrap;
-      flex-shrink: 0;
+      font-size: 0.7rem; font-weight: 700; color: #aaa;
+      letter-spacing: 0.1em; white-space: nowrap; flex-shrink: 0;
     }
-    /* ➖ ➕ buttons */
     .vol-ctrl-btn {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: none;
-      background: #444;
-      color: #fff;
-      font-size: 1.2rem;
-      font-weight: 900;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: background 0.15s, transform 0.1s;
+      width: 34px; height: 34px; border-radius: 50%; border: none;
+      background: #444; color: #fff; font-size: 1.2rem; font-weight: 900;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: background 0.15s, transform 0.1s;
       -webkit-tap-highlight-color: transparent;
     }
     .vol-ctrl-btn:active { transform: scale(0.88); background: #666; }
-
-    /* Bar graph (display only, no touch interaction) */
     #vol-graph {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      gap: 3px;
-      pointer-events: none; /* タッチ無効 */
-      user-select: none;
+      flex: 1; display: flex; align-items: center; gap: 3px;
+      pointer-events: none; user-select: none;
     }
     .vol-seg {
-      flex: 1;
-      height: 18px;
-      border-radius: 3px;
-      background: #333;
-      transition: background 0.2s;
+      flex: 1; height: 18px; border-radius: 3px;
+      background: #333; transition: background 0.2s;
     }
     .vol-seg.active { background: #4a9eff; }
     .vol-seg.active.warn { background: #f39c12; }
     .vol-seg.active.loud { background: #e74c3c; }
-
-    /* 消音ボタン */
     #mute-btn {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: none;
-      background: #444;
-      color: #fff;
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: background 0.15s, transform 0.1s;
+      width: 34px; height: 34px; border-radius: 50%; border: none;
+      background: #444; color: #fff; font-size: 1rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: background 0.15s, transform 0.1s;
       -webkit-tap-highlight-color: transparent;
     }
     #mute-btn:active { transform: scale(0.88); }
@@ -172,42 +164,26 @@
 
     /* ===== TIMER PANELS ===== */
     .timer-panel {
-      border-radius: 14px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 14px 12px 12px;
-      border: 2px solid transparent;
-      position: relative;
-      transition: opacity 0.35s, border-color 0.35s;
-      flex: 1;
-      min-height: 0;
-      overflow: hidden;
+      border-radius: 14px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 12px 12px; border: 2px solid transparent;
+      position: relative; transition: opacity 0.35s, border-color 0.35s;
+      flex: 1; min-height: 0; overflow: hidden;
     }
-
-    /* ===== RESET BUTTON (top-right corner) ===== */
     .reset-btn {
-      position: absolute;
-      top: 10px; right: 10px;
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      border: none;
-      font-size: 1.1rem; font-weight: 900;
-      cursor: pointer;
+      position: absolute; top: 10px; right: 10px;
+      width: 40px; height: 40px; border-radius: 50%; border: none;
+      font-size: 1.1rem; font-weight: 900; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: transform 0.15s, opacity 0.2s;
       -webkit-tap-highlight-color: transparent;
-      z-index: 5;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      z-index: 5; box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
     .reset-btn:active { transform: scale(0.88) rotate(-30deg); }
     #timer-white .reset-btn { background: #ddd; color: #333; }
     #timer-blue  .reset-btn { background: #1a4a9a; color: #cce0ff; border: 1px solid #4477cc; }
     #timer-red   .reset-btn { background: #8a1a1a; color: #ffcccc; border: 1px solid #cc4444; }
 
-    /* ===== WHITE TIMER ===== */
     #timer-white { background: var(--white-bg); border-color: var(--white-border); flex: 1.2; }
     #timer-white .panel-label { color: #555; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
     #timer-white .time-display {
@@ -223,16 +199,13 @@
       transition: opacity 0.2s, transform 0.1s, background 0.2s;
       -webkit-tap-highlight-color: transparent;
       box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 2px;
+      display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 2px;
     }
     #timer-white .start-btn:active { transform: scale(0.92); }
     #timer-white .start-btn.running { background: #c0392b; }
 
-    /* ===== BOTTOM ROW ===== */
     #bottom-row { display: flex; gap: 6px; flex: 1.6; min-height: 0; }
 
-    /* ===== BLUE TIMER ===== */
     #timer-blue { background: var(--blue-bg); border-color: var(--blue-border); flex: 1; }
     #timer-blue .panel-label { color: #99bbff; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
     #timer-blue .time-display {
@@ -253,7 +226,6 @@
     #timer-blue .start-btn:active { transform: scale(0.92); }
     #timer-blue .start-btn.running { background: #c0392b; }
 
-    /* ===== RED TIMER ===== */
     #timer-red { background: var(--red-bg); border-color: var(--red-border); flex: 1; }
     #timer-red .panel-label { color: #ffaaaa; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
     #timer-red .time-display {
@@ -274,11 +246,9 @@
     #timer-red .start-btn:active { transform: scale(0.92); }
     #timer-red .start-btn.running { background: #c0392b; }
 
-    /* ===== LOCK STATE ===== */
     .timer-panel.locked { opacity: var(--lock-opacity); pointer-events: none; }
     #timer-white.locked .time-display { color: #bbb; }
 
-    /* ===== SET ROW ===== */
     .set-row { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; }
     #timer-white .set-row { color: #555; }
     #timer-blue  .set-row { color: #aaccff; }
@@ -292,20 +262,18 @@
     #timer-white .set-row input { background: rgba(0,0,0,0.08); color: #333; border-color: #bbb; }
     .set-row span { font-size: 0.75rem; }
 
-    /* ===== ALERT FLASH ===== */
-    @keyframes flash { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+    @keyframes flash { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
     .time-display.alert { animation: flash 0.4s ease-in-out 3; }
 
-    /* ===== DONE BADGE ===== */
     .done-badge {
       display: none; position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: 'Orbitron', monospace; font-size: clamp(1.4rem, 7vw, 2.4rem);
+      transform: translate(-50%,-50%);
+      font-family: 'Orbitron', monospace; font-size: clamp(1.4rem,7vw,2.4rem);
       font-weight: 900; letter-spacing: 0.1em; pointer-events: none; z-index: 10;
     }
-    #timer-white .done-badge { color: #d00; background: rgba(248,248,248,0.88); padding: 6px 16px; border-radius: 10px; }
-    #timer-blue  .done-badge { color: #ffe066; background: rgba(10,30,80,0.88); padding: 6px 16px; border-radius: 10px; }
-    #timer-red   .done-badge { color: #ffe066; background: rgba(80,10,10,0.88); padding: 6px 16px; border-radius: 10px; }
+    #timer-white .done-badge { color:#d00; background:rgba(248,248,248,0.88); padding:6px 16px; border-radius:10px; }
+    #timer-blue  .done-badge { color:#ffe066; background:rgba(10,30,80,0.88); padding:6px 16px; border-radius:10px; }
+    #timer-red   .done-badge { color:#ffe066; background:rgba(80,10,10,0.88); padding:6px 16px; border-radius:10px; }
     .done-badge.show { display: block; }
   </style>
 </head>
@@ -325,22 +293,34 @@
       <input type="checkbox" id="agree-check" onchange="toggleCheck()">
       <label for="agree-check">上記の内容を理解し、一切の責任を開発者に問わないことに同意して使用します。</label>
     </div>
-    <button id="disclaimer-agree-btn" onclick="startApp()" disabled>同意して使用する</button>
+    <button id="disclaimer-agree-btn" onclick="onAgree()" disabled>同意して使用する</button>
+  </div>
+</div>
+
+<!-- iOS SOUND TEST MODAL -->
+<div id="soundtest-overlay">
+  <div id="soundtest-box">
+    <h3>🔔 音の動作確認（iPhone用）</h3>
+    <p>
+      iPhoneでは最初に一度タップして音を有効にする必要があります。<br>
+      下のボタンを押して音が聞こえることを確認してください。
+    </p>
+    <button id="soundtest-play-btn" onclick="doSoundTest()">🔊 テスト音を鳴らす</button>
+    <button id="soundtest-skip-btn" onclick="closeSoundTest()">スキップしてアプリを開く</button>
+    <p id="soundtest-note">※ 本体の音量を上げてからお試しください。</p>
   </div>
 </div>
 
 <!-- MAIN APP -->
 <div id="app">
 
-  <!-- VOLUME BAR (常時表示・白タイマー上部) -->
+  <!-- VOLUME BAR -->
   <div id="volume-bar">
     <span class="vol-label">🔊 音量</span>
     <button class="vol-ctrl-btn" onclick="changeVolume(-1)" aria-label="音量を下げる">－</button>
-    <div id="vol-graph">
-      <!-- 10セグメント：JSで生成 -->
-    </div>
+    <div id="vol-graph"></div>
     <button class="vol-ctrl-btn" onclick="changeVolume(1)" aria-label="音量を上げる">＋</button>
-    <button id="mute-btn" onclick="toggleMute()" aria-label="消音">🔇</button>
+    <button id="mute-btn" onclick="toggleMute()" aria-label="消音">🔊</button>
   </div>
 
   <!-- WHITE TIMER -->
@@ -360,8 +340,6 @@
 
   <!-- BOTTOM ROW -->
   <div id="bottom-row">
-
-    <!-- BLUE TIMER -->
     <div class="timer-panel" id="timer-blue">
       <button class="reset-btn" onclick="resetTimer('blue')" title="リセット">↺</button>
       <div class="panel-label">🔵 BLUE</div>
@@ -376,7 +354,6 @@
       <div class="done-badge" id="b-done">TIME UP</div>
     </div>
 
-    <!-- RED TIMER -->
     <div class="timer-panel" id="timer-red">
       <button class="reset-btn" onclick="resetTimer('red')" title="リセット">↺</button>
       <div class="panel-label">🔴 RED</div>
@@ -390,7 +367,6 @@
       </div>
       <div class="done-badge" id="r-done">TIME UP</div>
     </div>
-
   </div>
 </div>
 
@@ -403,48 +379,112 @@
     btn.disabled = !cb.checked;
     btn.classList.toggle('active', cb.checked);
   }
-  function startApp() {
+
+  function onAgree() {
     if (!document.getElementById('agree-check').checked) return;
     document.getElementById('disclaimer-overlay').style.display = 'none';
+
+    // iOSかどうか判定
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    if (isIOS) {
+      // iOSはサウンドテストモーダルを表示
+      document.getElementById('soundtest-overlay').classList.add('show');
+    } else {
+      // Android等はそのままアプリ起動
+      launchApp();
+    }
+  }
+
+  // ===== iOS SOUND TEST =====
+  // AudioContextをユーザータップで初期化＆解除するための専用処理
+  let audioCtx = null;
+  let audioUnlocked = false;
+
+  function initAudioCtx() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    // suspendedなら必ずresumeする
+    if (audioCtx.state === 'suspended') {
+      return audioCtx.resume();
+    }
+    return Promise.resolve();
+  }
+
+  // 実際に無音バッファを再生してiOSのロックを解除する
+  function unlockAudio() {
+    return initAudioCtx().then(() => {
+      // 無音バッファを再生（iOSロック解除の定番手法）
+      const buf = audioCtx.createBuffer(1, 1, 22050);
+      const src = audioCtx.createBufferSource();
+      src.buffer = buf;
+      src.connect(audioCtx.destination);
+      src.start(0);
+      audioUnlocked = true;
+    });
+  }
+
+  function doSoundTest() {
+    unlockAudio().then(() => {
+      // テスト音を鳴らす
+      beep(880, 0.2, 0.6);
+      setTimeout(() => beep(1100, 0.3, 0.6), 320);
+
+      const btn = document.getElementById('soundtest-play-btn');
+      btn.textContent = '✅ 音が聞こえたらOKです';
+      btn.classList.add('ok');
+      document.getElementById('soundtest-note').textContent =
+        '音が聞こえた場合はそのままアプリを開いてください。';
+
+      // 2秒後に自動でアプリへ
+      setTimeout(() => closeSoundTest(), 2200);
+    });
+  }
+
+  function closeSoundTest() {
+    document.getElementById('soundtest-overlay').classList.remove('show');
+    launchApp();
+  }
+
+  function launchApp() {
     document.getElementById('app').classList.add('visible');
+    buildVolGraph();
+    getDisplay('white').textContent = fmt(getSeconds('white'));
+    getDisplay('blue').textContent  = fmt(getSeconds('blue'));
+    getDisplay('red').textContent   = fmt(getSeconds('red'));
   }
 
   // ===== VOLUME & AUDIO =====
   const VOL_STEPS = 10;
-  let volLevel = 7;   // 0〜10（0=消音相当）
+  let volLevel = 7;
   let isMuted = false;
-  let audioCtx = null;
-
-  function getAudioCtx() {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    // iOSはユーザー操作後でないと動かないため、resumeを試みる
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    return audioCtx;
-  }
-
-  // ビープ音を鳴らす: freq=周波数, dur=秒, vol=0〜1
-  function beep(freq, dur, vol) {
-    try {
-      const ctx = getAudioCtx();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.type = 'sine';
-      osc.frequency.value = freq;
-      gain.gain.setValueAtTime(vol, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + dur);
-    } catch(e) { /* 音声エラーは無視 */ }
-  }
 
   function getVolGain() {
     if (isMuted || volLevel === 0) return 0;
     return volLevel / VOL_STEPS;
   }
 
-  // 警告音パターン: beepsArr = [{freq, dur}, ...]
+  function beep(freq, dur, vol) {
+    try {
+      // AudioContextが未初期化なら作成（スタートボタン等のタップ時）
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const osc  = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+      osc.start(audioCtx.currentTime);
+      osc.stop(audioCtx.currentTime + dur);
+    } catch(e) { /* 音声エラー無視 */ }
+  }
+
   function playAlert(beepsArr) {
     const vol = getVolGain();
     if (vol === 0) return;
@@ -455,12 +495,11 @@
     });
   }
 
-  // 各タイミングの音パターン定義
   const SOUND = {
-    warn1:  [{ freq: 880, dur: 0.18 }, { freq: 880, dur: 0.18 }],           // 短2回
-    warn2:  [{ freq: 880, dur: 0.18 }, { freq: 880, dur: 0.18 }, { freq: 1100, dur: 0.3 }], // 2回+高音
-    warn3:  [{ freq: 1100, dur: 0.25 }, { freq: 1100, dur: 0.25 }],          // 高音2回
-    finish: [{ freq: 1320, dur: 0.4 }, { freq: 1320, dur: 0.4 }, { freq: 1320, dur: 0.6 }], // 終了3回
+    warn1:  [{freq:880,dur:0.18},{freq:880,dur:0.18}],
+    warn2:  [{freq:880,dur:0.18},{freq:880,dur:0.18},{freq:1100,dur:0.3}],
+    warn3:  [{freq:1100,dur:0.25},{freq:1100,dur:0.25}],
+    finish: [{freq:1320,dur:0.4},{freq:1320,dur:0.4},{freq:1320,dur:0.6}],
   };
 
   // ===== VOLUME BAR UI =====
@@ -481,26 +520,21 @@
       const i = parseInt(seg.dataset.idx);
       const active = !isMuted && i <= volLevel;
       seg.classList.toggle('active', active);
-      seg.classList.remove('warn', 'loud');
+      seg.classList.remove('warn','loud');
       if (active) {
         if (i >= 9) seg.classList.add('loud');
         else if (i >= 7) seg.classList.add('warn');
       }
     });
-    // ミュートボタン表示
     const mb = document.getElementById('mute-btn');
     mb.classList.toggle('muted', isMuted);
     mb.textContent = isMuted ? '🔇' : '🔊';
   }
 
   function changeVolume(delta) {
-    if (isMuted) {
-      // ミュート中に±操作したらミュート解除
-      isMuted = false;
-    }
+    if (isMuted) isMuted = false;
     volLevel = Math.max(0, Math.min(VOL_STEPS, volLevel + delta));
     updateVolGraph();
-    // 操作音フィードバック（小さめ）
     const v = getVolGain();
     if (v > 0) beep(660, 0.1, v * 0.5);
   }
@@ -512,88 +546,68 @@
 
   // ===== TIMER STATE =====
   const timers = {
-    white: { interval: null, remaining: 60,  running: false },
-    blue:  { interval: null, remaining: 180, running: false },
-    red:   { interval: null, remaining: 180, running: false },
+    white: { interval:null, remaining:60,  running:false },
+    blue:  { interval:null, remaining:180, running:false },
+    red:   { interval:null, remaining:180, running:false },
   };
   let activeTimer = null;
-  const startBtnId = { white: 'w-start-btn', blue: 'b-start-btn', red: 'r-start-btn' };
+  const startBtnId = { white:'w-start-btn', blue:'b-start-btn', red:'r-start-btn' };
 
   function getSeconds(key) {
-    if (key === 'white') {
-      return (parseInt(document.getElementById('w-min').value)||0)*60 +
-             (parseInt(document.getElementById('w-sec').value)||0);
-    } else if (key === 'blue') {
-      return (parseInt(document.getElementById('b-min').value)||0)*60 +
-             (parseInt(document.getElementById('b-sec').value)||0);
-    } else {
-      return (parseInt(document.getElementById('r-min').value)||0)*60 +
-             (parseInt(document.getElementById('r-sec').value)||0);
-    }
+    if (key==='white') return (parseInt(document.getElementById('w-min').value)||0)*60+(parseInt(document.getElementById('w-sec').value)||0);
+    if (key==='blue')  return (parseInt(document.getElementById('b-min').value)||0)*60+(parseInt(document.getElementById('b-sec').value)||0);
+                       return (parseInt(document.getElementById('r-min').value)||0)*60+(parseInt(document.getElementById('r-sec').value)||0);
   }
-
-  function fmt(sec) {
-    return String(Math.floor(sec/60)).padStart(2,'0') + ':' + String(sec%60).padStart(2,'0');
-  }
-
-  function getDisplay(key) {
-    return document.getElementById(key==='white'?'w-display':key==='blue'?'b-display':'r-display');
-  }
-  function getDone(key) {
-    return document.getElementById(key==='white'?'w-done':key==='blue'?'b-done':'r-done');
-  }
-  function getPanel(key) { return document.getElementById('timer-'+key); }
-  function getStartBtn(key) { return document.getElementById(startBtnId[key]); }
+  function fmt(sec) { return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0'); }
+  function getDisplay(key) { return document.getElementById(key==='white'?'w-display':key==='blue'?'b-display':'r-display'); }
+  function getDone(key)    { return document.getElementById(key==='white'?'w-done':key==='blue'?'b-done':'r-done'); }
+  function getPanel(key)   { return document.getElementById('timer-'+key); }
+  function getStartBtn(key){ return document.getElementById(startBtnId[key]); }
 
   function setStartBtnState(key, running) {
     const btn = getStartBtn(key);
     btn.classList.toggle('running', running);
-    if (key === 'white') {
-      btn.innerHTML = running ? '⏹<br>ストップ' : '▶<br>スタート';
-    } else {
-      btn.textContent = running ? '⏹ ストップ' : '▶ スタート';
-    }
+    if (key==='white') btn.innerHTML = running ? '⏹<br>ストップ' : '▶<br>スタート';
+    else               btn.textContent = running ? '⏹ ストップ' : '▶ スタート';
   }
 
-  function vibrate(pattern) {
-    if ('vibrate' in navigator) navigator.vibrate(pattern);
-  }
+  function vibrate(pattern) { if ('vibrate' in navigator) navigator.vibrate(pattern); }
 
   function flashDisplay(key) {
     const el = getDisplay(key);
     el.classList.remove('alert');
     void el.offsetWidth;
     el.classList.add('alert');
-    el.addEventListener('animationend', () => el.classList.remove('alert'), { once: true });
+    el.addEventListener('animationend', () => el.classList.remove('alert'), { once:true });
   }
 
   function updateLock() {
     ['white','blue','red'].forEach(key => {
-      getPanel(key).classList.toggle('locked', !!(activeTimer && activeTimer !== key));
+      getPanel(key).classList.toggle('locked', !!(activeTimer && activeTimer!==key));
     });
   }
 
   function startTimer(key) {
-    if (activeTimer && activeTimer !== key) return;
+    if (activeTimer && activeTimer!==key) return;
     const t = timers[key];
 
     if (t.running) {
-      clearInterval(t.interval); t.interval = null;
-      t.running = false; activeTimer = null;
-      setStartBtnState(key, false); updateLock();
+      clearInterval(t.interval); t.interval=null;
+      t.running=false; activeTimer=null;
+      setStartBtnState(key,false); updateLock();
       return;
     }
 
-    if (t.remaining <= 0) resetTimer(key);
-    t.remaining = t.remaining > 0 ? t.remaining : getSeconds(key);
-    if (t.remaining <= 0) return;
+    if (t.remaining<=0) resetTimer(key);
+    t.remaining = t.remaining>0 ? t.remaining : getSeconds(key);
+    if (t.remaining<=0) return;
 
-    // iOSのAudioContext解除をユーザー操作タイミングで行う
-    getAudioCtx();
+    // iOSでも確実に音を出すため、スタートボタンのタップ時点でも解除を試みる
+    if (audioCtx && audioCtx.state==='suspended') audioCtx.resume();
 
-    t.running = true; activeTimer = key;
+    t.running=true; activeTimer=key;
     getDone(key).classList.remove('show');
-    setStartBtnState(key, true); updateLock();
+    setStartBtnState(key,true); updateLock();
     t.interval = setInterval(() => tick(key), 1000);
   }
 
@@ -602,85 +616,55 @@
     t.remaining--;
     getDisplay(key).textContent = fmt(t.remaining);
 
-    if (key === 'white') {
-      if (t.remaining === 15) {
-        vibrate([200, 100, 200]);
-        playAlert(SOUND.warn1);
-        flashDisplay(key);
-      }
-      if (t.remaining <= 0) finishTimer(key);
+    if (key==='white') {
+      if (t.remaining===15) { vibrate([200,100,200]); playAlert(SOUND.warn1); flashDisplay(key); }
+      if (t.remaining<=0)   finishTimer(key);
     } else {
-      if (t.remaining === 60) {
-        vibrate([200, 100, 200]);
-        playAlert(SOUND.warn1);
-        flashDisplay(key);
-      } else if (t.remaining === 30) {
-        vibrate([200, 100, 200, 100, 200]);
-        playAlert(SOUND.warn2);
-        flashDisplay(key);
-      } else if (t.remaining === 10) {
-        vibrate([300, 80, 300]);
-        playAlert(SOUND.warn3);
-        flashDisplay(key);
-      }
-      if (t.remaining <= 0) finishTimer(key);
+      if      (t.remaining===60) { vibrate([200,100,200]);         playAlert(SOUND.warn1); flashDisplay(key); }
+      else if (t.remaining===30) { vibrate([200,100,200,100,200]); playAlert(SOUND.warn2); flashDisplay(key); }
+      else if (t.remaining===10) { vibrate([300,80,300]);          playAlert(SOUND.warn3); flashDisplay(key); }
+      if (t.remaining<=0) finishTimer(key);
     }
   }
 
   function finishTimer(key) {
     const t = timers[key];
-    clearInterval(t.interval); t.interval = null;
-    t.running = false; t.remaining = 0;
-    getDisplay(key).textContent = '00:00';
+    clearInterval(t.interval); t.interval=null;
+    t.running=false; t.remaining=0;
+    getDisplay(key).textContent='00:00';
     getDone(key).classList.add('show');
-    activeTimer = null;
-    setStartBtnState(key, false); updateLock();
-    vibrate([500, 100, 500, 100, 500]);
+    activeTimer=null;
+    setStartBtnState(key,false); updateLock();
+    vibrate([500,100,500,100,500]);
     playAlert(SOUND.finish);
   }
 
   function resetTimer(key) {
     const t = timers[key];
-    clearInterval(t.interval); t.interval = null;
-    t.running = false;
-    t.remaining = getSeconds(key);
-    getDisplay(key).textContent = fmt(t.remaining);
+    clearInterval(t.interval); t.interval=null;
+    t.running=false;
+    t.remaining=getSeconds(key);
+    getDisplay(key).textContent=fmt(t.remaining);
     getDone(key).classList.remove('show');
-    setStartBtnState(key, false);
-    if (activeTimer === key) { activeTimer = null; updateLock(); }
+    setStartBtnState(key,false);
+    if (activeTimer===key) { activeTimer=null; updateLock(); }
   }
 
-  // 入力変更で表示更新
   ['w-min','w-sec'].forEach(id => {
     document.getElementById(id).addEventListener('change', () => {
-      if (!timers.white.running) {
-        timers.white.remaining = getSeconds('white');
-        getDisplay('white').textContent = fmt(timers.white.remaining);
-      }
+      if (!timers.white.running) { timers.white.remaining=getSeconds('white'); getDisplay('white').textContent=fmt(timers.white.remaining); }
     });
   });
   ['b-min','b-sec'].forEach(id => {
     document.getElementById(id).addEventListener('change', () => {
-      if (!timers.blue.running) {
-        timers.blue.remaining = getSeconds('blue');
-        getDisplay('blue').textContent = fmt(timers.blue.remaining);
-      }
+      if (!timers.blue.running) { timers.blue.remaining=getSeconds('blue'); getDisplay('blue').textContent=fmt(timers.blue.remaining); }
     });
   });
   ['r-min','r-sec'].forEach(id => {
     document.getElementById(id).addEventListener('change', () => {
-      if (!timers.red.running) {
-        timers.red.remaining = getSeconds('red');
-        getDisplay('red').textContent = fmt(timers.red.remaining);
-      }
+      if (!timers.red.running) { timers.red.remaining=getSeconds('red'); getDisplay('red').textContent=fmt(timers.red.remaining); }
     });
   });
-
-  // 初期化
-  buildVolGraph();
-  getDisplay('white').textContent = fmt(getSeconds('white'));
-  getDisplay('blue').textContent  = fmt(getSeconds('blue'));
-  getDisplay('red').textContent   = fmt(getSeconds('red'));
 </script>
 </body>
 </html>
